@@ -24,8 +24,14 @@ public class Igra {
             int stupac = scanner.nextInt();
 
             if (ploca.polje[red][stupac] == '-') {
-
                 ploca.polje[red][stupac] = trenutniIgrac;
+                if (provjeriPobjedu(trenutniIgrac)) {
+
+                    ploca.ispisiPlocu();
+                    System.out.println("Pobjedio je igrac " + trenutniIgrac);
+
+                    igraTraje = false;
+                }
 
                 if (trenutniIgrac == Igrac.PLAYER1) {
                     trenutniIgrac = Igrac.PLAYER2;
@@ -39,6 +45,31 @@ public class Igra {
             }
 
         }
+    }
+    public boolean provjeriPobjedu(char znak) {
+
+        char[][] p = ploca.polje;
+
+        for (int i = 0; i < 3; i++) {
+
+            if (p[i][0] == znak && p[i][1] == znak && p[i][2] == znak) {
+                return true;
+            }
+
+            if (p[0][i] == znak && p[1][i] == znak && p[2][i] == znak) {
+                return true;
+            }
+        }
+
+        if (p[0][0] == znak && p[1][1] == znak && p[2][2] == znak) {
+            return true;
+        }
+
+        if (p[0][2] == znak && p[1][1] == znak && p[2][0] == znak) {
+            return true;
+        }
+
+        return false;
     }
     }
 
